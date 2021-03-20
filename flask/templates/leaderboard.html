@@ -10,6 +10,10 @@ img{
     width: 72px;
 }
 
+.league_table{
+    margin: auto;
+}
+
 {% endblock %}
 
 {% block navbar %}
@@ -25,12 +29,30 @@ img{
         <div class="row">
         <div class="col-md-8" id="div1">
             <div class="container">
-                <table>
-                    <td><img src="/static/League5.png"></td>
-                    <td><img src="/static/League4.png"></td>
-                    <td><img src="/static/League3.png" id="current_league"></td>
-                    <td><img src="/static/League2.png"></td>
-                    <td><img src="/static/League1.png"></td>
+                <div align="center">
+                    <table class="league_table">
+                        <td><img src="/static/League5.png"></td>
+                        <td><img src="/static/League4.png"></td>
+                        <td><img src="/static/League3.png" id="current_league"></td>
+                        <td><img src="/static/League2.png"></td>
+                        <td><img src="/static/League1.png"></td>
+                    </table>
+                    <h2>3rd League</h2>
+                </div>
+
+
+                <table class="table">
+                    {% for header in leaderboard_header %}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+
+                    {% for row in leaderboard_data %}
+                    <tr>
+                        {% for cell in row %}
+                        <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
                 </table>
             </div>
             <br><br><br>
