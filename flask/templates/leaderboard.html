@@ -1,5 +1,38 @@
 {% extends "layout.html" %}
 
+{% block javascript %}
+<script>
+// Set the date we're counting down to
+var countDownDate = new Date("Marc 21, 2021 23:59:59").getTime();
+
+// Update the count down every 1 second
+var x = setInterval(function() {
+
+  // Get today's date and time
+  var now = new Date().getTime();
+
+  // Find the distance between now and the count down date
+  var distance = countDownDate - now;
+
+  // Time calculations for days, hours, minutes and seconds
+  var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+  var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+  // Display the result in the element with id="demo"
+  document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+  + minutes + "m";
+
+  // If the count down is finished, write some text
+  if (distance < 0) {
+    clearInterval(x);
+    document.getElementById("demo").innerHTML = "EXPIRED";
+  }
+}, 1000);
+</script>
+{% endblock %}
+
 {% block style %}
 img{
     width: 48px;
@@ -8,6 +41,10 @@ img{
 
 #current_league{
     width: 72px;
+}
+
+.league_table{
+    margin: auto;
 }
 
 {% endblock %}
@@ -25,16 +62,35 @@ img{
         <div class="row">
         <div class="col-md-8" id="div1">
             <div class="container">
-                <table>
-                    <td><img src="/static/League5.png"></td>
-                    <td><img src="/static/League4.png"></td>
-                    <td><img src="/static/League3.png" id="current_league"></td>
-                    <td><img src="/static/League2.png"></td>
-                    <td><img src="/static/League1.png"></td>
+                <div align="center">
+                    <table class="league_table">
+                        <td><img src="/static/League5.png"></td>
+                        <td><img src="/static/League4.png"></td>
+                        <td><img src="/static/League3.png" id="current_league"></td>
+                        <td><img src="/static/League_inactive.png"></td>
+                        <td><img src="/static/League_inactive.png"></td>
+                    </table>
+                    <h2>3rd League</h2>
+                    <p>Top 10 advance to the next league:</p>
+                    <p id="demo"></p>
+
+                </div>
+
+
+                <table class="table">
+                    {% for header in leaderboard_header %}
+                    <th>{{ header }}</th>
+                    {% endfor %}
+
+                    {% for row in leaderboard_data %}
+                    <tr>
+                        {% for cell in row %}
+                        <td>{{ cell }}</td>
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
                 </table>
             </div>
-            <br><br><br>
-            <h2>Leaderboard League 3 (Arnold Schwarzenegger League)</h2>
         </div>
         <div class="col-md-4" id="div2">
             <br><br><br>
