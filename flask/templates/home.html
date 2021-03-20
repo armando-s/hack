@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block style %}
+
+{% endblock %}
+
+{% block navbar %}
+    <li class="active"><a href="/">Overview<span class="sr-only">(aktuell)</span></a></li>
+    <li><a href="/leaderboard">Leaderboard</a></li>
+    <li><a href="/challenges">Challenges</a></li>
+    <li><a href="/about">About</a></li>
+{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="row">
+        <div class="col-md-6" id="div1">
+            <br><br><br>
+            <h2>Daily Overview</h2>
+            <br><br>
+            <span class="badge bg-primary">Primary</span>
+        </div>
+        <div class="col-md-6" id="div2">
+            <br><br><br>
+            <h2>Most important Health Metrics</h2>
+        </div>
+        </div>
+    </div>
+    <br><br>
+
+    </body>
+
+{% endblock %}
