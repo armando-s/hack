@@ -1,5 +1,9 @@
 from flask import Flask, render_template, redirect, request, Markup
 from operator import itemgetter
+import pandas as pd
+import plotly
+import plotly.express as px
+import json
 
 app = Flask(__name__)
 
@@ -8,7 +12,26 @@ app = Flask(__name__)
 
 @app.route('/', methods=['POST', 'GET'])
 def home():
-    return render_template('home.html')
+    df_steps = pd.read_csv('static/test_com.samsung.shealth.step_daily_trend.202103172116.csv',sep=';')
+    df_steps = df_steps.drop(['binning_data', 'update_time', 'create_time', 'source_pkg_name', 'deviceuuid', 'pkg_name', 'datauuid'], axis=1)
+    df_steps = df_steps[df_steps['source_type'] == -2]
+    df_steps['day_time'] = pd.to_datetime(df_steps['day_time'], unit='ms')
+    df_steps['day_time'] = df_steps['day_time'].dt.strftime('%Y-%m-%d %H')
+    df_steps = df_steps.sort_values('day_time')
+    df_steps = df_steps.tail(30)
+    df_steps['average'] = df_steps['count'].mean()
+    fig = px.line(y=df_steps['average'], x=df_steps['day_time'], color_discrete_sequence=['#E55187']*len(df_steps))
+    fig.add_bar(x=df_steps['day_time'], y=df_steps['count'], marker=dict(color="#990842"))
+    fig.update_layout({'plot_bgcolor':'rgba(0, 0, 0, 0)'})
+    fig.update_layout(showlegend=False)
+    fig.update_xaxes(title=None)
+    fig.update_yaxes(title=None)
+    plot_steps_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+
+    return render_template('home.html', plot_steps_json=plot_steps_json,
+                           plot_sleep_json=plot_steps_json,
+                           plot_calo_json=plot_steps_json,
+                           plot_hr_json=plot_steps_json)
 
 
 @app.route('/leaderboard', methods=['POST', 'GET'])

@@ -1,5 +1,10 @@
 {% extends "layout.html" %}
 
+{% block javascript %}
+    <!-- Das neueste kompilierte und minimierte JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+{% endblock %}
+
 {% block style %}
     #card1 {background-color:#990842;}
     a {color: white}
@@ -24,87 +29,143 @@
 {% block body %}
     <div class="container-fluid">
         <div class="row">
-        <div class="col-md-6" id="div1">
-            <br>
-            <h2>Daily Overview</h2>
-            <br>
-            <div id="card1" class="card text-white mb-3" style="max-width: 18rem;">
-              <div class="card-header">Leaderboard</div>
-              <div class="card-body">
-                <h5 class="card-title">You are currently at Rank 5</h5>
-                  <p class="card-text">Congrats you improved your ranking by 3 places during the last 7 days! To see the full leaderboard click <a href="/leaderboard">here</a>.</p>
-              </div>
-            </div>
-            <br>
-            <nav>
-              <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Activities</button>
-                <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Quiz</button>
-                <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Video</button>
-              </div>
-            </nav>
-            <div class="tab-content" id="nav-tabContent">
-              <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                  <div class="card-group">
-                      <div class="card">
-                        <img src="static/winningStreak.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">Strike!</h5>
-                            <p class="card-text">You successfully completed an activity for 12 days in a row! See your longest strikes compared to others <a style="color: black" href="">here</a>.</p>
-                        </div>
-                      </div>
-                      <div class="card">
-                        <img src="static/activity1.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">You did not complete your daily activity yet!</h5>
-                          <p class="card-text">Find a list of possible activities for today <a style="color: black" href="">here</a>. Complete one in order to keep your streak alive.</p>
-                        </div>
-                      </div>
-                      <div class="card">
-                        <img src="static/swimming.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                          <h5 class="card-title">History</h5>
-                          <p class="card-text">See your highes strikes in history and compare them with others <a style="color: black" href="">here</a>.</p>
-                        </div>
-                      </div>
-                    </div>
-              </div>
-              <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                  <div class="card mb-3" style="max-width: 540px;">
-                      <div class="row g-0">
-                        <div class="col-md-4">
-                          <img id="imageQuiz" src="static/questions.jpg" alt="...">
-                        </div>
-                        <div class="col-md-8">
-                          <div class="card-body">
-                            <h5 class="card-title">Complete your daily quiz</h5>
-                              <p class="card-text">Learn something about health in a playful way and gain extra points meanwhile. Follow this <a style="color: black" href="">link</a> in order to get to the quiz.</p>
+            <div class="col-md-6" id="div1">
+                <br>
+                <h2>Daily Overview</h2>
+                <br>
+                <div id="card1" class="card text-white mb-3" style="max-width: 18rem;">
+                  <div class="card-header">Leaderboard</div>
+                  <div class="card-body">
+                    <h5 class="card-title">You are currently at Rank 5</h5>
+                      <p class="card-text">Congrats you improved your ranking by 3 places during the last 7 days! To see the full leaderboard click <a href="/leaderboard">here</a>.</p>
+                  </div>
+                </div>
+                <br>
+                <nav>
+                  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                    <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Activities</button>
+                    <button class="nav-link" id="nav-profile-tab" data-bs-toggle="tab" data-bs-target="#nav-profile" type="button" role="tab" aria-controls="nav-profile" aria-selected="false">Quiz</button>
+                    <button class="nav-link" id="nav-contact-tab" data-bs-toggle="tab" data-bs-target="#nav-contact" type="button" role="tab" aria-controls="nav-contact" aria-selected="false">Video</button>
+                  </div>
+                </nav>
+                <div class="tab-content" id="nav-tabContent">
+                  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                      <div class="card-group">
+                          <div class="card">
+                            <img src="static/winningStreak.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">Strike!</h5>
+                                <p class="card-text">You successfully completed an activity for 12 days in a row! See your longest strikes compared to others <a style="color: black" href="">here</a>.</p>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <img src="static/activity1.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">You did not complete your daily activity yet!</h5>
+                              <p class="card-text">Find a list of possible activities for today <a style="color: black" href="">here</a>. Complete one in order to keep your streak alive.</p>
+                            </div>
+                          </div>
+                          <div class="card">
+                            <img src="static/swimming.jpg" class="card-img-top" alt="...">
+                            <div class="card-body">
+                              <h5 class="card-title">History</h5>
+                              <p class="card-text">See your highes strikes in history and compare them with others <a style="color: black" href="">here</a>.</p>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-              </div>
-              <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                  <div class="card mb-3" style="max-width: 540px;">
-                      <div class="row g-0">
-                        <div class="col-md-4">
-                          <img src="..." alt="...">
-                        </div>
-                        <div class="col-md-8">
-                          <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                  </div>
+                  <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                      <div class="card mb-3" style="max-width: 540px;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                              <img id="imageQuiz" src="static/questions.jpg" alt="...">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">Complete your daily quiz</h5>
+                                  <p class="card-text">Learn something about health in a playful way and gain extra points meanwhile. Follow this <a style="color: black" href="">link</a> in order to get to the quiz.</p>
+                              </div>
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </div>
-              </div>
+                  </div>
+                  <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                      <div class="card mb-3" style="max-width: 540px;">
+                          <div class="row g-0">
+                            <div class="col-md-4">
+                              <img src="..." alt="...">
+                            </div>
+                            <div class="col-md-8">
+                              <div class="card-body">
+                                <h5 class="card-title">Card title</h5>
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                  </div>
+                </div>
             </div>
-        </div>
-        <div class="col-md-6" id="div2">
-            <br>
-            <h2>Most important Health Metrics</h2>
-        </div>
+            <div class="col-md-6" id="div2">
+                <br>
+                <h2>Most important Health Metrics</h2>
+                <div class="row">
+                    <div class="col-mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Steps</h3>
+                                <div id="stepsPlot"></div>
+                                <script>
+                                const layout = {}
+                                const config = {"displayModeBar": false};
+                                Plotly.newPlot("stepsPlot", {{ plot_steps_json | safe }}, layout, config)
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Sleep</h3>
+                                <div id="sleepPlot"></div>
+                                <script>
+                                const layout = {}
+                                const config = {"displayModeBar": false};
+                                Plotly.newPlot("sleepPlot", {{ plot_sleep_json | safe }}, layout, config)
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Calories</h3>
+                                <div id="caloPlot"></div>
+                                <script>
+                                const layout = {}
+                                const config = {"displayModeBar": false};
+                                Plotly.newPlot("caloPlot", {{ plot_calo_json | safe }}, layout, config)
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-mb-3">
+                        <div class="card">
+                            <div class="card-body">
+                                <h3>Heartrate</h3>
+                                <div id="hrPlot"></div>
+                                <script>
+                                const layout = {}
+                                const config = {"displayModeBar": false};
+                                Plotly.newPlot("hrPlot", {{ plot_hr_json | safe }}, layout, config)
+                                </script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <br><br>
