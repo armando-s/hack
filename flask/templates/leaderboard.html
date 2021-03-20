@@ -1,6 +1,14 @@
 {% extends "layout.html" %}
 
 {% block style %}
+img{
+    width: 48px;
+    margin: 6px;
+}
+
+#current_league{
+    width: 72px;
+}
 
 {% endblock %}
 
@@ -16,6 +24,15 @@
     <div class="container-fluid">
         <div class="row">
         <div class="col-md-8" id="div1">
+            <div class="container">
+                <table>
+                    <td><img src="/static/League5.png"></td>
+                    <td><img src="/static/League4.png"></td>
+                    <td><img src="/static/League3.png" id="current_league"></td>
+                    <td><img src="/static/League2.png"></td>
+                    <td><img src="/static/League1.png"></td>
+                </table>
+            </div>
             <br><br><br>
             <h2>Leaderboard League 3 (Arnold Schwarzenegger League)</h2>
         </div>
