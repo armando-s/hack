@@ -24,6 +24,10 @@
     {% endblock %}
     <style type="text/css">
 
+        #nav {
+            background-color:#990842;
+        }
+
         {% block style %}
         {% endblock %}
 
@@ -34,30 +38,19 @@
 
         <!--<div id="welcomeWhitespace"></div>-->
 
-        <div class="container">
-        <nav class="navbar navbar-default  navbar-fixed-top" id="navbar">
-            <div class="container-fluid">
-      <!-- Titel und Schalter werden für eine bessere mobile Ansicht zusammengefasst -->
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                  <span class="sr-only">Navigation ein-/ausblenden</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <!--<a class="navbar-brand" href="#"><img id="logo4" src="logo.png"></a>-->
-              </div>
-
-              <!-- Alle Navigationslinks, Formulare und anderer Inhalt werden hier zusammengefasst und können dann ein- und ausgeblendet werden -->
-              <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
+        <nav id="nav" class="navbar navbar-expand-lg navbar-dark">
+          <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     {% block navbar %}
                     {% endblock %}
-                </ul>
-              </div><!-- /.navbar-collapse -->
-            </div><!-- /.container-fluid -->
-          </nav>
-        </div>
+              </ul>
+            </div>
+          </div>
+        </nav>
 
 {% block body %}
 

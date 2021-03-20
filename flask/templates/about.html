@@ -5,15 +5,23 @@
 {% endblock %}
 
 {% block navbar %}
-    <li><a href="/">Overview<span class="sr-only">(aktuell)</span></a></li>
-    <li><a href="/leaderboard">Leaderboard</a></li>
-    <li><a href="/challenges">Challenges</a></li>
-    <li class="active"><a href="/about">About</a></li>
+    <li class="nav-item">
+      <a class="nav-link" href="/">Home</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/leaderboard">Leaderboard</a>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link" href="/challenges">Challenges</a>
+    </li>
+      <li class="nav-item">
+      <a class="nav-link active" aria-current="page" href="/about">About</a>
+    </li>
 {% endblock %}
 
 {% block body %}
     <div class="container-fluid">
-        <br><br><br>
+        <br>
         <h2>About the App</h2>
     </div>
 
