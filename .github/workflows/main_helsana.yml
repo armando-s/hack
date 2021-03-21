@@ -31,4 +31,4 @@ jobs:
       with:
         app-name: 'helsana'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_1576af5fbcac4026b0e24f0f6c729318 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_32dbd5557f9e489fa74d24a9bd42e897 }}
