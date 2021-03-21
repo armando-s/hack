@@ -2,7 +2,6 @@ from flask import Flask, render_template, redirect, request, Markup
 from operator import itemgetter
 import pandas as pd
 import plotly
-import plotly.express as px
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import json
@@ -30,32 +29,16 @@ def home():
     df_steps = df_steps[df_steps['source_type'] == -2]
     df_steps['day_time'] = pd.to_datetime(df_steps['day_time'], unit='ms')
     df_steps['day_time'] = df_steps['day_time'].dt.strftime('%Y-%m-%d %H')
+    df_steps['day_time'] = pd.to_datetime(df_steps['day_time']) + timedelta(days=3)
     df_steps = df_steps.sort_values('day_time')
     df_steps = df_steps.tail(30)
     df_steps['average'] = df_steps['count'].mean()
-    # fig = px.line(y=df_steps['average'], x=df_steps['day_time'], color_discrete_sequence=['#E55187']*len(df_steps), height=250)
-    # fig.add_bar(x=df_steps['day_time'], y=df_steps['count'], marker=dict(color="#990842"))
-    # fig.update_layout({'plot_bgcolor':'rgba(0, 0, 0, 0)'})
-    # fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    # fig.update_layout(showlegend=False)
-    # fig.update_xaxes(title=None)
-    # fig.update_yaxes(title=None)
-    # plot_steps_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
     fig.add_trace(go.Bar(y=df_steps['count'], x=df_steps['day_time'], showlegend=False, marker_color=['#E55187']*len(df_steps)), row=1, col=1)
 
     df_hr = pd.read_csv('static/hr.csv', sep=';')
     df_hr = df_hr.sort_values('TS')
-    df_hr = df_hr[df_hr['TS'] >= '2021-03-13 11:40:00']
-    # fig = px.line(x=df_hr['TS'], y=df_hr['com.samsung.health.heart_rate.heart_rate'], height=250)
-    # fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)'})
-    # fig.update_traces(line_color='#990842')
-    # fig.update_layout(showlegend=False)
-    # fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    # fig.update_xaxes(title=None)
-    # fig.update_yaxes(title=None)
-    # plot_hr_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
+    df_hr['TS'] = pd.to_datetime(df_hr['TS']) + timedelta(days=6)
+    df_hr = df_hr[df_hr['TS'] >= '2021-03-20 00:00:00']
     fig.add_trace(go.Scatter(x=df_hr['TS'], y=df_hr['com.samsung.health.heart_rate.heart_rate'], showlegend=False, marker_color='#E55187'), row=2, col=1)
 
     df_cal = pd.read_csv('static/cal.csv', sep=';')
@@ -66,17 +49,9 @@ def home():
     df_cal = df_cal.drop(['Unnamed: 4', 'Unnamed: 5'], axis=1)
     df_cal['TS'] = pd.to_datetime(df_cal['TS'], unit='ms')
     df_cal['TS'] = df_cal['TS'].dt.strftime('%Y-%m-%d')
+    df_cal['TS'] = pd.to_datetime(df_cal['TS']) + timedelta(days=3)
     df_cal = df_cal.sort_values('TS')
     df_cal = df_cal.tail(30)
-    # fig = px.bar(df_cal, x='TS', y=['Resting Calories', 'Active Calories'],
-    #              color_discrete_map={'Resting Calories': '#61AEDE', 'Active Calories': '#990842'}, height=250)
-    # fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)'})
-    # fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    # fig.update_layout(legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1,bgcolor="rgba(0, 0, 0, 0)",))
-    # fig.update_xaxes(title=None)
-    # fig.update_yaxes(title=None)
-    # plot_cal_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
     fig.add_trace(go.Bar(x=df_cal['TS'], y=df_cal['Resting Calories'],offsetgroup=0, name='Resting Calories', marker_color='#61AEDE'), row=1, col=2)
     fig.add_trace(go.Bar(x=df_cal['TS'], y=df_cal['Active Calories'], offsetgroup=0, name='Active Calories', marker_color='#990842',base=df_cal['Resting Calories']), row=1, col=2)
 
@@ -96,16 +71,8 @@ def home():
     df_sleep.loc[df_sleep['stage'] == 40003, 'stage_'] = 'deep'
     df_sleep.loc[df_sleep['stage'] == 40004, 'stage_'] = 'REM'
     df_sleep = df_sleep.sort_values('start_time')
-    # start_timefig = px.line(df_sleep, x='start_time', y='stage_', category_orders={'stage_': ['awake', 'light', 'deep', 'REM']}, height=250)
-    # fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)'})
-    # fig.update_layout(margin=dict(l=10, r=10, t=10, b=10))
-    # fig.update_xaxes(title=None)
-    # fig.update_yaxes(title=None)
-    # fig.update_traces(line_color='#990842')
-    #
-    # plot_sleep_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-
     fig.add_trace(go.Scatter(x=df_sleep['start_time'], y=df_sleep['stage'], showlegend=False, marker_color='#E55187'), row=2, col=2)
+
     fig.update_yaxes(autorange='reversed',tickmode='array',tickvals=[40001,40002,40003,40004],ticktext=['awake', 'light', 'deep', 'REM'], row=2,col=2)
     fig.update_layout(height=600)
     fig.update_layout({'plot_bgcolor': 'rgba(0, 0, 0, 0)'})
@@ -139,15 +106,5 @@ def leaderboard():
     return render_template('leaderboard.html', leaderboard_header=leaderboard_header, leaderboard_data=leaderboard_data)
 
 
-@app.route('/challenges', methods=['POST', 'GET'])
-def recommendations():
-    return render_template('challenges.html')
-
-
-@app.route('/about', methods=['POST', 'GET'])
-def about():
-    return render_template('about.html')
-
-
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
