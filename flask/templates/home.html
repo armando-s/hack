@@ -1,7 +1,6 @@
 {% extends "layout.html" %}
 
 {% block javascript %}
-    <!-- Das neueste kompilierte und minimierte JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 {% endblock %}
 
@@ -13,6 +12,9 @@
     #buttonForm {background-color:#990842; color: white; margin: auto;}
     #overview1 {background-color: white; opacity: 0.75; color: black;}
     #overview2 {text-align:center; border-width: 5px; border-color: #990842; border-radius: 25px;}
+    #pic{object-fit: cover; height: 150px}
+    #buttonForm{margin: 10px 0px 0px 0px;}
+
 {% endblock %}
 
 {% block navbar %}
@@ -22,42 +24,33 @@
     <li class="nav-item">
       <a class="nav-link" href="/leaderboard">Leaderboard</a>
     </li>
-      <li class="nav-item">
-      <a class="nav-link" href="/challenges">Challenges</a>
-    </li>
-      <li class="nav-item">
-      <a class="nav-link" href="/about">About</a>
-    </li>
 {% endblock %}
 
 {% block body %}
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6" id="div1">
-            <br>
-            <div class="card bg-dark text-white" id="overview2">
-              <img src="static/chess3.jpg" class="card-img" alt="...">
-              <div class="card-img-overlay" id="overview1">
-                <h3 class="card-title">Daily Overview</h3>
-                  <br>
+            <div class="card card-shadow" id="chart">
+                <div class="card-body">
+                    <h2 class="card-title">Daily Overview</h2>
                   <div>
-                      <h4 class="card-title"><b>12</b> in a row Streak!</h4>
-                      <p class="card-text">You successfully completed an activity for 12 days in a row! Complete one of the below activities in order to keep your streak alive.</p>
+                      <h4 class="card-title"><b>12</b> days in a row 🔥</h4>
+                      <p class="card-text">Complete one of the below activities in order to keep your streak alive.</p>
                   </div>
                   <div>
-                      <h4 class="card-title">Rank <b>7</b> on the Leaderboard!</h4>
-                      <p class="card-text">Congrats, you improved your ranking by 3 places during the last 7 days! To see the full leaderboard click <a href="/leaderboard">here</a>.</p>
+                      <h4 class="card-title">Rank <b>7</b> on the Leaderboard 🏅</h4>
+                      <p class="card-text">To see the full leaderboard click <a href="/leaderboard">here</a>.</p>
                   </div>
                   <div>
-                      <h4 class="card-title"><b>100</b> Points collected Today!</h4>
+                      <h4 class="card-title"><b>100</b> Points collected Today 🎉</h4>
                       <p class="card-text">Well done! Check the tabs below to see if you can collect even more points.</p>
                   </div>
-
-              </div>
+                </div>
             </div>
-            <br>
+
             <div class="card card-shadow" id="chart">
                     <div class="card-body">
+                        <h2>Earn Points</h2>
                         <nav>
                           <div class="nav nav-tabs" id="nav-tab" role="tablist">
                             <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Activities</button>
@@ -72,21 +65,21 @@
                                     <img src="static/activity5.jpg" class="card-img-top" alt="...">
                                   </div>
                                   <div class="card">
-                                    <img src="static/food.jpg" style="max-height: 178px;" class="card-img-top" alt="...">
+                                    <img src="static/food.jpg" style="max-height: 178px;" class="card-img-top" alt="..." id="pic">
                                     <div class="card-body">
                                       <h5 class="card-title">Daily Activity</h5>
                                       <p class="card-text">Choose one activity:</p>
                                         <form>
-                                            <p><input type="radio" id="act1" name="activities">
-                                            <label for="act1">Walk 4500 steps</label></p>
-                                            <p><input type="radio" id="act2" name="activities">
-                                        <label for="act2">Eat 1 apple</label></p>
-                                      <button type="button" class="btn" id="buttonForm">Submit</button>
+                                            <div><input type="radio" id="act1" name="activities">
+                                            <label for="act1">Walk 4500 steps</label></div>
+                                            <div><input type="radio" id="act2" name="activities">
+                                            <label for="act2">Eat 1 apple</label></div>
+                                            <button type="button" class="btn button2" id="buttonForm">Submit</button>
                                         </form>
                                     </div>
                                       </div>
                                   <div class="card">
-                                    <img src="static/swimming.jpg" style="max-height: 178px;" class="card-img-top" alt="...">
+                                    <img src="static/swimming.jpg" style="max-height: 178px;" class="card-img-top" alt="..." id="pic">
                                     <div class="card-body">
                                       <h5 class="card-title">Challenges</h5>
                                       <p class="card-text">We will inform you here about upcoming challenges where you can gain extra points. Stay tuned!</p>
@@ -98,7 +91,7 @@
                               <div class="card mb-3" style="max-width: 800px;">
                                   <div class="row g-0">
                                     <div class="col-md-6">
-                                      <img id="imageQuiz" src="static/questions.jpg" alt="...">
+                                      <img id="imageQuiz" src="static/questions.jpg" alt="..." id="pic">
                                     </div>
                                     <div class="col-md-6">
                                       <div class="card-body">
@@ -130,7 +123,6 @@
 
         </div>
             <div class="col-md-6" id="div2">
-                <br>
                 <div class="card card-shadow" id="chart">
                     <div class="card-body">
                         <h2>Most important Health Metrics</h2>
@@ -143,7 +135,6 @@
             </div>
         </div>
     </div>
-    <br><br>
 
     </body>
 
